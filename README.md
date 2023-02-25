@@ -1,3 +1,3 @@
 # QR Generator
 
-An open-source QR generator with easy deployment on your own servers or hosts.
+An open-source QR generator with customization. The code utilizes the open-source [node-qrcode library](https://github.com/soldair/node-qrcode)
