@@ -11,24 +11,53 @@ html, body{
 }
 
 .wrapper{
+  height: 292px;
   background: #fff;
-  max-width: 310px;
+  width: 350px;
   border-radius: 7px;
   padding: 16px 25px;
+  transition: height 0.2s ease;
+}
+
+.wrapper.active{
+  height: auto;
 }
 
 .wrapper form{
-  margin: 20px 0 30px;
+  margin: 20px 0 25px;
 }
 
-.form label{
-  font-size: 15px;
+.form-label{
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 2px;
 }
 
-.form :where(input, select, button){
+form :where(input, select, button){
   width: 100%;
   height: 55px;
   border: none;
   outline: none;
-  border-radius: 5px;
+}
+
+#fdownload{
+  width: 220px;
+}
+
+.wrapper .qrcode{
+  opacity: 0;
+  pointer-events: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  padding: 20px 0 0 0;
+  border: 1px solid #DFE2E7;
+  border-radius: 0.25rem;
+}
+
+.wrapper.active .qrcode{
+  opacity: 1;
+  pointer-events: auto;
+  transition: opacity 0.5s 0.05s ease;
 }
