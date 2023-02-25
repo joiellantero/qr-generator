@@ -1,0 +1,24 @@
+{
+  "name": "qr-generator",
+  "version": "1.0.0",
+  "description": "An open-source QR generator with easy deployment on your own servers or hosts.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/joiellantero/qr-generator.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/joiellantero/qr-generator/issues"
+  },
+  "homepage": "https://github.com/joiellantero/qr-generator#readme",
+  "dependencies": {
+    "express": "^4.18.2"
+  }
+}
