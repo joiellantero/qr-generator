@@ -71,7 +71,7 @@ form :where(input, select, button){
   flex-direction: column;
 }
 
-#download span{
+#download span.size{
   font-size: 10px;
   font-weight: 500;
   margin-top: 0;

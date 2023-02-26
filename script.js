@@ -64,11 +64,11 @@ const generateQR = (url, size, container) => {
 
 const createDownloadBtn = (url, size) => {
   const link = document.createElement('a');
-  link.id = 'Download';
+  link.id = 'download';
   link.classList = 'btn btn-light rounded-0';
   link.href = url
   link.download = 'image.png';
-  link.innerHTML = `download <span>${size}x${size} PIXELS</span>`;
+  link.innerHTML = `<span>Download</span><span class="size">${size}x${size} PIXELS</span>`;
 
   document.getElementById('qr').appendChild(link);
 };
