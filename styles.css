@@ -11,7 +11,7 @@ html, body{
 }
 
 .wrapper{
-  height: 480px;
+  height: 585px;
   background: #fff;
   width: 350px;
   border-radius: 7px;
@@ -20,7 +20,7 @@ html, body{
 }
 
 .wrapper.active{
-  height: 720px;
+  height: 820px;
 }
 
 .wrapper form{
@@ -44,7 +44,7 @@ form :where(input, select, button){
 }
 
 .wrapper #qr{
-  position: relative;
+  position: absolute;
   opacity: 0;
   pointer-events: none;
   display: flex;
@@ -57,6 +57,7 @@ form :where(input, select, button){
 }
 
 .wrapper.active #qr{
+  position: relative;
   opacity: 1;
   pointer-events: auto;
   transition: opacity 0.5s ease 0.2s;

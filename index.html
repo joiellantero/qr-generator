@@ -12,6 +12,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
     <link rel="stylesheet" href="styles.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/merge-images/2.0.0/index.umd.min.js" integrity="sha512-CucGNBSd0heUFsbvPI5vFv+vTTAu8IoiFzzXpt1MEa5zfOb+j8Sz1ukN89tyL/+UySg7FqKEkq+PbPNwkIbdbw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
   </head>
   <body>
     <!--[if lt IE 7]>
@@ -32,12 +33,22 @@
             <input type="url" class="form-control rounded-1" id="furl" placeholder="https://website.com" required>
           </div>
           <div class="mb-3">
+            <label for="ftheme" class="form-label text-uppercase">Theme</label>
+            <select class="form-select" id="ftheme" aria-label="Select theme">
+              <option value="none">None</option>
+              <option value="candy">[Lost and Found Label] Candy</option>
+              <option value="coffee">[Lost and Found Label] Coffee</option>
+              <option value="cherry">[Lost and Found Label] Cherry</option>
+              <option value="forest">[Lost and Found Label] Forest</option>
+            </select>
+          </div>
+          <div class="mb-3">
             <label for="fsize" class="form-label text-uppercase">Size</label>
             <select class="form-select rounded-1" id="fsize" aria-label="Select Size">
-              <option value="125" selected>125x125</option>
-              <option value="250">250x250</option>
-              <option value="500">500x500</option>
-              <option value="1000">1000x1000</option>
+              <option value="128" selected>128x128</option>
+              <option value="256">256x256</option>
+              <option value="512">512x512</option>
+              <option value="1024">1024x1024</option>
             </select>
           </div>
           <div class="row align-items-center">
