@@ -11,16 +11,16 @@ html, body{
 }
 
 .wrapper{
-  height: 600px;
+  height: 480px;
   background: #fff;
   width: 350px;
   border-radius: 7px;
   padding: 16px 25px;
-  transition: height 0.2s ease;
+  transition: height 0.25s ease-in-out;
 }
 
 .wrapper.active{
-  height: 850px;
+  height: 720px;
 }
 
 .wrapper form{
@@ -60,7 +60,7 @@ form :where(input, select, button){
 .wrapper.active #qr{
   opacity: 1;
   pointer-events: auto;
-  transition: opacity 0.5s 0.05s ease;
+  transition: opacity 0.5s ease 0.2s;
 }
 
 #download{

@@ -1,8 +1,6 @@
 let fqr = document.getElementById('fqr');
 let qr = document.getElementById('qr');
 let wrapper = document.querySelector(".wrapper");
-let colordark = "#000000";
-let colorlight = "#ffffff";
 
 fqr.addEventListener('submit', e => {
   e.preventDefault();
@@ -13,8 +11,8 @@ fqr.addEventListener('submit', e => {
   // obtain user input for url and size of the qr
   let url = e.target.elements.furl.value;
   let size = e.target.elements.fsize.value;
-
-  handleColor(e.target.elements.fcolordark.value, e.target.elements.fcolorlight.value);
+  let colordark = e.target.elements.fcolordark.value
+  let colorlight = e.target.elements.fcolorlight.value
 
   // creating the div for the QR image 
   const qr_container = document.createElement('div');
@@ -93,25 +91,4 @@ const generateHiddenQR = (url, size, colordark, colorlight) => {
   document.getElementById('qr').appendChild(qr_container);
 
   generateQR(url, size, colordark, colorlight, document.getElementById("qr-img-hidden"));
-};
-
-const handleColor = (cd, cl) => {
-  const hex_check = /^#([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})$/;
-  const hash_check = /#/;
-  if (cl){
-    colorlight = cl;
-    if (!hash_check.test(cl))
-      colorlight = "#" + cl;
-  }
-  if (cd && hex_check.test(cd)){
-    colordark = cd;
-    if (!hash_check.test(cd))
-      colordark = "#" + cd;
-  }
-  if (!hex_check.test(cl) || !cl){
-    colorlight = "#ffffff";
-  }
-  if (!hex_check.test(cd) || !cd){
-    colordark = "#000000";
-  }
 };
