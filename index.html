@@ -20,7 +20,10 @@
 
     <div class="card wrapper">
       <div class="card-body">
-        <h1 class="fw-bold fs-5">QRGen v1.0.0</h1>
+        <div class="d-inline">
+          <h1 class="fw-bold fs-5 d-inline">QRGen</h1>
+          <span class="badge text-bg-primary rounded-1">v1.0.0</span>
+        </div>
         <p class="small text-secondary">An open-source project</p>
 
         <form id="fqr">
@@ -30,7 +33,7 @@
           </div>
           <div class="mb-3">
             <label for="fsize" class="form-label text-uppercase">Size</label>
-            <select class="form-select rounded-1" id="fsize" aria-label="Select Size" required>
+            <select class="form-select rounded-1" id="fsize" aria-label="Select Size">
               <option value="125" selected>125x125</option>
               <option value="250">250x250</option>
               <option value="500">500x500</option>
