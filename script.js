@@ -1,27 +1,42 @@
 let fqr = document.getElementById('fqr');
-let fdowload = document.getElementById('fdownload');
-let qr = document.getElementById('qr')
+let qr = document.getElementById('qr');
+let wrapper = document.querySelector(".wrapper");
 
 fqr.addEventListener('submit', e => {
   e.preventDefault();
 
-  clearUI();
+  // clear any existing QR and save button
+  clearData();
 
+  // obtain user input for url and size of the qr
   let url = e.target.elements.furl.value;
   let size = e.target.elements.fsize.value;
 
-  let wrapper = document.querySelector(".wrapper");
-  wrapper.classList.add("active");
+  // creating the div for the QR image 
+  const qr_container = document.createElement('div');
+  qr_container.id = "qr-img";
+  document.getElementById('qr').appendChild(qr_container);
 
-  const qrimg = document.createElement('div');
-  qrimg.id = "qr-img";
-  document.getElementById('qr').appendChild(qrimg);
+  // disable button and show loading text upon pressing generate button
+  document.querySelector("#fqr button").disabled = true;
+  document.querySelector("#fqr button").innerHTML = "<span class='spinner-border spinner-border-sm' role='status' aria-hidden='true'></span> Loading..."
 
-  generateQR(url)
   setTimeout(() => {
-    const url = document.querySelector("#qr-img img").src
-    createDownloadBtn(url, size);
-  }, 50);
+    wrapper.classList.add("active");
+
+    // return generate button to its original state
+    document.querySelector("#fqr button").disabled = false;
+    document.querySelector("#fqr button").innerHTML = 'Generate'
+
+    // generate the QR using the url input by the user
+    generateQR(url);
+
+    // capture the image data generated for saving later
+    setTimeout(() => {
+      const url = document.querySelector("#qr-img img").src
+      createDownloadBtn(url, size);
+    }, 50);
+  }, 1000);
 });
 
 const generateQR = (url) => {
@@ -38,7 +53,7 @@ const generateQR = (url) => {
 const createDownloadBtn = (url, size) => {
   const link = document.createElement('a');
   link.id = 'save-img';
-  link.classList = 'btn btn-primary';
+  link.classList = 'btn btn-light rounded-0';
   link.href = url
   link.download = 'image.png';
   link.innerHTML = 'Save Image';
@@ -46,7 +61,8 @@ const createDownloadBtn = (url, size) => {
   document.getElementById('qr').appendChild(link);
 };
 
-const clearUI = () => {
+const clearData = () => {
+  wrapper.classList.remove("active");
   qr.innerHTML = '';
   const saveBtn = document.getElementById('save-link');
   if (saveBtn) {

@@ -20,7 +20,7 @@ html, body{
 }
 
 .wrapper.active{
-  height: 600px;
+  height: 620px;
 }
 
 .wrapper form{
@@ -44,20 +44,27 @@ form :where(input, select, button){
   width: 220px;
 }
 
-.wrapper .qrcode{
+.wrapper #qr{
+  position: relative;
   opacity: 0;
   pointer-events: none;
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  padding: 20px 0 20px 0;
+  padding: 20px 0 55px 0;
   border: 1px solid #DFE2E7;
   border-radius: 0.25rem;
 }
 
-.wrapper.active .qrcode{
+.wrapper.active #qr{
   opacity: 1;
   pointer-events: auto;
   transition: opacity 0.5s 0.05s ease;
+}
+
+#save-img{
+  position: absolute;
+  bottom: 0;
+  width: 100%;
 }
