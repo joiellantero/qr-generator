@@ -11,7 +11,7 @@ html, body{
 }
 
 .wrapper{
-  height: 410px;
+  height: 600px;
   background: #fff;
   width: 350px;
   border-radius: 7px;
@@ -20,7 +20,7 @@ html, body{
 }
 
 .wrapper.active{
-  height: 650px;
+  height: 850px;
 }
 
 .wrapper form{

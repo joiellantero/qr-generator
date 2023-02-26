@@ -1,6 +1,8 @@
 let fqr = document.getElementById('fqr');
 let qr = document.getElementById('qr');
 let wrapper = document.querySelector(".wrapper");
+let colordark = "#000000";
+let colorlight = "#ffffff";
 
 fqr.addEventListener('submit', e => {
   e.preventDefault();
@@ -11,6 +13,8 @@ fqr.addEventListener('submit', e => {
   // obtain user input for url and size of the qr
   let url = e.target.elements.furl.value;
   let size = e.target.elements.fsize.value;
+
+  handleColor(e.target.elements.fcolordark.value, e.target.elements.fcolorlight.value);
 
   // creating the div for the QR image 
   const qr_container = document.createElement('div');
@@ -28,10 +32,10 @@ fqr.addEventListener('submit', e => {
 
     // generate the QR using the url input by the user
     // it will always have 125 size
-    generateQR(url, 125, document.getElementById("qr-img"));
+    generateQR(url, 125, colordark, colorlight, document.getElementById("qr-img"));
 
     // generate the hidden QR to be used for downloading with the custom size from user input
-    generateHiddenQR(url, size);
+    generateHiddenQR(url, size, colordark, colorlight);
 
     // capture the image data generated for saving later
     setTimeout(() => {
@@ -51,13 +55,13 @@ const hideLoading = () => {
   document.querySelector("#fqr button").innerHTML = 'Generate'
 };
 
-const generateQR = (url, size, container) => {
+const generateQR = (url, size, colordark, colorlight, container) => {
   new QRCode(container, {
     text: url,
     width: size,
     height: size,
-    colorDark : "#000000",
-    colorLight : "#ffffff",
+    colorDark : colordark,
+    colorLight : colorlight,
     correctLevel : QRCode.CorrectLevel.H
   });
 };
@@ -82,11 +86,32 @@ const clearData = () => {
   }
 };
 
-const generateHiddenQR = (url, size) => {
+const generateHiddenQR = (url, size, colordark, colorlight) => {
   const qr_container = document.createElement('div');
   qr_container.id = "qr-img-hidden";
   qr_container.className = "visually-hidden";
   document.getElementById('qr').appendChild(qr_container);
 
-  generateQR(url, size, document.getElementById("qr-img-hidden"));
+  generateQR(url, size, colordark, colorlight, document.getElementById("qr-img-hidden"));
+};
+
+const handleColor = (cd, cl) => {
+  const hex_check = /^#([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})$/;
+  const hash_check = /#/;
+  if (cl){
+    colorlight = cl;
+    if (!hash_check.test(cl))
+      colorlight = "#" + cl;
+  }
+  if (cd && hex_check.test(cd)){
+    colordark = cd;
+    if (!hash_check.test(cd))
+      colordark = "#" + cd;
+  }
+  if (!hex_check.test(cl) || !cl){
+    colorlight = "#ffffff";
+  }
+  if (!hex_check.test(cd) || !cd){
+    colordark = "#000000";
+  }
 };
