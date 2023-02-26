@@ -30,7 +30,6 @@ html, body{
 .form-label{
   font-size: 12px;
   font-weight: 500;
-  letter-spacing: 2px;
 }
 
 form :where(input, select, button){
