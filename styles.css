@@ -20,7 +20,7 @@ html, body{
 }
 
 .wrapper.active{
-  height: 620px;
+  height: 650px;
 }
 
 .wrapper form{
@@ -52,7 +52,7 @@ form :where(input, select, button){
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  padding: 20px 0 55px 0;
+  padding: 20px 0 70px 0;
   border: 1px solid #DFE2E7;
   border-radius: 0.25rem;
 }
@@ -63,8 +63,17 @@ form :where(input, select, button){
   transition: opacity 0.5s 0.05s ease;
 }
 
-#save-img{
+#download{
   position: absolute;
   bottom: 0;
   width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+#download span{
+  font-size: 10px;
+  font-weight: 500;
+  margin-top: 0;
+  padding-top: 0;
 }

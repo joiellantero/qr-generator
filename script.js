@@ -18,32 +18,44 @@ fqr.addEventListener('submit', e => {
   document.getElementById('qr').appendChild(qr_container);
 
   // disable button and show loading text upon pressing generate button
-  document.querySelector("#fqr button").disabled = true;
-  document.querySelector("#fqr button").innerHTML = "<span class='spinner-border spinner-border-sm' role='status' aria-hidden='true'></span> Loading..."
+  showLoading();
 
   setTimeout(() => {
     wrapper.classList.add("active");
 
     // return generate button to its original state
-    document.querySelector("#fqr button").disabled = false;
-    document.querySelector("#fqr button").innerHTML = 'Generate'
+    hideLoading();
 
     // generate the QR using the url input by the user
-    generateQR(url);
+    // it will always have 125 size
+    generateQR(url, 125, document.getElementById("qr-img"));
+
+    // generate the hidden QR to be used for downloading with the custom size from user input
+    generateHiddenQR(url, size);
 
     // capture the image data generated for saving later
     setTimeout(() => {
-      const url = document.querySelector("#qr-img img").src
+      const url = document.querySelector("#qr-img-hidden img").src
       createDownloadBtn(url, size);
     }, 50);
   }, 1000);
 });
 
-const generateQR = (url) => {
-  new QRCode(document.getElementById("qr-img"), {
+const showLoading = () => {
+  document.querySelector("#fqr button").disabled = true;
+  document.querySelector("#fqr button").innerHTML = "<span class='spinner-border spinner-border-sm' role='status' aria-hidden='true'></span> Loading..."
+};
+
+const hideLoading = () => {
+  document.querySelector("#fqr button").disabled = false;
+  document.querySelector("#fqr button").innerHTML = 'Generate'
+};
+
+const generateQR = (url, size, container) => {
+  new QRCode(container, {
     text: url,
-    width: 125,
-    height: 125,
+    width: size,
+    height: size,
     colorDark : "#000000",
     colorLight : "#ffffff",
     correctLevel : QRCode.CorrectLevel.H
@@ -52,11 +64,11 @@ const generateQR = (url) => {
 
 const createDownloadBtn = (url, size) => {
   const link = document.createElement('a');
-  link.id = 'save-img';
+  link.id = 'Download';
   link.classList = 'btn btn-light rounded-0';
   link.href = url
   link.download = 'image.png';
-  link.innerHTML = 'Save Image';
+  link.innerHTML = `download <span>${size}x${size} PIXELS</span>`;
 
   document.getElementById('qr').appendChild(link);
 };
@@ -68,4 +80,13 @@ const clearData = () => {
   if (saveBtn) {
     saveBtn.remove();
   }
+};
+
+const generateHiddenQR = (url, size) => {
+  const qr_container = document.createElement('div');
+  qr_container.id = "qr-img-hidden";
+  qr_container.className = "visually-hidden";
+  document.getElementById('qr').appendChild(qr_container);
+
+  generateQR(url, size, document.getElementById("qr-img-hidden"));
 };
