@@ -17,11 +17,6 @@ fqr.addEventListener('submit', e => {
   let colordark = e.target.elements.fcolordark.value
   let colorlight = e.target.elements.fcolorlight.value
 
-  // creating the div for the QR image 
-  const qr_container = document.createElement('div');
-  qr_container.id = "qr-img";
-  qr.appendChild(qr_container);
-
   // disable button and show loading text upon pressing generate button
   showLoading();
 
@@ -30,6 +25,11 @@ fqr.addEventListener('submit', e => {
 
     // return generate button to its original state
     hideLoading();
+
+    // creating the div for the QR image 
+    const qr_container = document.createElement('div');
+    qr_container.id = "qr-img";
+    qr.appendChild(qr_container);
 
     // generate the QR using the url input by the user
     // it will always have 128 size
@@ -102,26 +102,23 @@ const generateHiddenQR = (url, size, colordark, colorlight) => {
   const qr_container = document.createElement('div');
   qr_container.id = "qr-img-hidden";
   qr_container.className = "visually-hidden";
-  document.getElementById('qr').appendChild(qr_container);
+  qr.appendChild(qr_container);
 
   generateQR(url, size, colordark, colorlight, document.getElementById("qr-img-hidden"));
 };
 
-const applyTheme = (qr) => {
-  const img = document.createElement('img');
-  img.id = 'qr-theme';
-  // img.classList = '';
-  img.height = 128;
-  img.width = 128;
-  document.getElementById('qr').appendChild(img);
+const applyTheme = (qrimg) => {
+  const theme_img = document.createElement('img');
+  theme_img.id = 'qr-theme';
+  theme_img.height = 128;
+  theme_img.width = 128;
+  document.getElementById('qr').appendChild(theme_img);
 
-  if (theme_value !== 'none'){
-    theme_value = `assets/templates/${theme_value}.png`;
-  }
+  let theme_src = `assets/templates/${theme_value}.png`;
 
   mergeImages([
-    { src: theme_value}, 
-    { src: qr, x: 155, y: 155}
+    { src: theme_src}, 
+    { src: qrimg, x: 155, y: 155}
   ])
   .then(b64 => document.getElementById('qr-theme').src = b64);
 };
