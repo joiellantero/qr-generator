@@ -135,6 +135,9 @@ ftheme.addEventListener('change', () => {
     if (theme_value == 'cherry') fcolordark.value = "#990112";
     if (theme_value == 'coffee') fcolordark.value = "#211E21";
     if (theme_value == 'forest') fcolordark.value = "#2F602D";
+    if (theme_value == 'bee') fcolordark.value = "#000000";
+    if (theme_value == 'warbler') fcolordark.value = "#234D6F";
+    if (theme_value == 'orange') fcolordark.value = "#EE4E33";
     isThemeActive = true;
   } else {
     fsize.disabled = false;
