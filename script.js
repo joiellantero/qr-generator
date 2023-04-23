@@ -47,9 +47,16 @@ fqr.addEventListener('submit', e => {
 
     // capture the image data generated for saving later
     setTimeout(() => {
-      const src = document.querySelector("#qr-img-hidden img").src
-      createDownloadBtn(src, size);
-      if (isThemeActive) applyTheme(src);
+      let src = document.querySelector("#qr-img-hidden img").src
+      if (isThemeActive) {
+        applyTheme(src);
+        setTimeout(() => {
+          src = document.getElementById('qr-theme').src
+          createDownloadBtn(src, size);
+        }, 50);
+      } else {
+        createDownloadBtn(src, size);
+      }
     }, 50);
   }, 1000);
 });
@@ -83,7 +90,7 @@ const createDownloadBtn = (src, size) => {
   link.id = 'download';
   link.classList = 'btn btn-light rounded-0';
   link.href = src
-  link.download = 'image.png';
+  link.download = 'qrcode.png';
   link.innerHTML = `<span>Download</span><span class="size">${size}x${size} PIXELS</span>`;
 
   document.getElementById('qr').appendChild(link);
@@ -120,7 +127,9 @@ const applyTheme = (qrimg) => {
     { src: theme_src}, 
     { src: qrimg, x: 155, y: 155}
   ])
-  .then(b64 => document.getElementById('qr-theme').src = b64);
+  .then(b64 => {
+    document.getElementById('qr-theme').src = b64
+  });
 };
 
 ftheme.addEventListener('change', () => {
