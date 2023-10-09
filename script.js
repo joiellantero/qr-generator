@@ -151,5 +151,6 @@ ftheme.addEventListener('change', () => {
   } else {
     fsize.disabled = false;
     isThemeActive = false;
+    if (theme_value == 'none') fcolordark.value = "#000000";
   }
 });

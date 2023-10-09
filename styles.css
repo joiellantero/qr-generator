@@ -1,9 +1,21 @@
 html, body{
-  background: aliceblue;
+  background: #0A1C33;
   display: flex;
   align-items: center;
   justify-content: center;
   min-height: 100vh;
+}
+
+h1, input, select, textarea{
+  color: white !important;
+}
+
+p, .form-label{
+  color: #6285b3;
+}
+
+.badge, button, #download{
+  background-color: #6285b3 !important;
 }
 
 .card{
@@ -12,7 +24,7 @@ html, body{
 
 .wrapper{
   height: 585px;
-  background: #fff;
+  background: #233A5B;
   width: 350px;
   border-radius: 7px;
   padding: 16px 25px;
@@ -39,6 +51,33 @@ form :where(input, select, button){
   outline: none;
 }
 
+form :where(input, select){
+  background: #4B6588 !important;
+  border: none;
+  outline: none;
+}
+
+select:hover{
+  cursor:pointer;
+}
+
+select:hover:disabled{
+  cursor:not-allowed;
+}
+
+input::placeholder{
+  color: #879cb8 !important;
+}
+
+input, select, button, #download{
+  border: none !important;
+}
+
+input:focus, select:focus, #download:focus {
+  border: none !important;
+  box-shadow: none !important;
+}
+
 #fdownload{
   width: 220px;
 }
@@ -52,7 +91,7 @@ form :where(input, select, button){
   align-items: center;
   flex-direction: column;
   padding: 20px 0 70px 0;
-  border: 1px solid #DFE2E7;
+  border: 1px solid #6285b3;
   border-radius: 0.25rem;
 }
 
@@ -69,6 +108,7 @@ form :where(input, select, button){
   width: 100%;
   display: flex;
   flex-direction: column;
+  color: white;
 }
 
 #download span.size{
