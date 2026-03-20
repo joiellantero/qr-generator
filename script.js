@@ -62,13 +62,13 @@ fqr.addEventListener('submit', e => {
 });
 
 const showLoading = () => {
-  document.querySelector("#fqr button").disabled = true;
-  document.querySelector("#fqr button").innerHTML = "<span class='spinner-border spinner-border-sm' role='status' aria-hidden='true'></span> Loading..."
+  document.querySelector(".btn-generate").disabled = true;
+  document.querySelector(".btn-generate").innerHTML = "<span class='spinner-border spinner-border-sm' role='status' aria-hidden='true'></span> Loading..."
 };
 
 const hideLoading = () => {
-  document.querySelector("#fqr button").disabled = false;
-  document.querySelector("#fqr button").innerHTML = 'Generate'
+  document.querySelector(".btn-generate").disabled = false;
+  document.querySelector(".btn-generate").innerHTML = 'Generate'
 };
 
 const generateQR = (url, size, colordark, colorlight, container) => {
