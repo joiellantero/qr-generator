@@ -1,98 +1,185 @@
-html, body{
-  background: #0A1C33;
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html, body {
+  background: #232736;
   display: flex;
   align-items: center;
   justify-content: center;
   min-height: 100vh;
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
 }
 
-h1, input, select, textarea{
-  color: white !important;
+h1, input, select, textarea {
+  color: #e8eeff !important;
 }
 
-p, .form-label{
-  color: #6285b3;
+p, .form-label {
+  color: #7a85aa;
 }
 
-.small > a{
-  color: rgba(255, 255, 255, 0.3);
-  text-decoration: none;
-  transition: color 0.2s ease-in-out;
-}
-
-.small > a:hover{
-  color: rgba(255, 255, 255);
-}
-
-.badge, button, #download{
-  background-color: #6285b3 !important;
-}
-
-.card{
-  border: none;
-}
-
-.wrapper{
-  height: 585px;
-  background: #233A5B;
-  width: 350px;
-  border-radius: 7px;
-  padding: 16px 25px;
-  transition: height 0.25s ease-in-out;
-}
-
-.wrapper.active{
-  height: 820px;
-}
-
-.wrapper form{
-  margin: 20px 0 25px;
-}
-
-.form-label{
-  font-size: 12px;
+.title-prompt {
+  color: #5781d6;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 13px;
   font-weight: 500;
 }
 
-form :where(input, select, button){
+.title-text {
+  font-family: 'JetBrains Mono', monospace;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+}
+
+.cursor-blink {
+  display: inline-block;
+  width: 8px;
+  height: 15px;
+  background: #75a0f5;
+  border-radius: 1px;
+  margin-left: 2px;
+  opacity: 0.7;
+  animation: blink 1s steps(2) infinite;
+  vertical-align: middle;
+}
+
+@keyframes blink {
+  0%, 100% { opacity: 0.7; }
+  50% { opacity: 0; }
+}
+
+.small > a {
+  color: #5a6a8a;
+  text-decoration: none;
+  transition: background 0.15s, color 0.15s, border-color 0.15s;
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  padding: 4px 10px;
+  border-radius: 5px;
+  border: 1px solid #75a0f51f;
+  background: #75a0f50d;
+}
+
+.small > a:hover {
+  color: #97b7f7;
+  background: #75a0f51f;
+  border-color: #75a0f547;
+}
+
+.badge, button, #download {
+  background: #75a0f5 !important;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+}
+
+button:hover, #download:hover {
+  background: #97b7f7 !important;
+  transform: translateY(-1px);
+  box-shadow: 0 0 18px #75a0f566, 0 0 36px #75a0f51a;
+}
+
+button:active, #download:active {
+  transform: translateY(0);
+}
+
+.card {
+  border: none;
+}
+
+.wrapper {
+  height: 605px;
+  background: #292d3e;
+  width: 380px;
+  border-radius: 10px;
+  padding: 28px 30px;
+  transition: height 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  border: 1px solid #75a0f51a;
+  box-shadow: 0 8px 40px rgba(0, 0, 0, 0.3);
+}
+
+.wrapper:hover {
+  border-color: #75a0f533;
+  box-shadow: 0 8px 40px rgba(0, 0, 0, 0.3), 0 0 12px #75a0f51f;
+}
+
+.wrapper.active {
+  height: 850px;
+}
+
+.wrapper form {
+  margin: 22px 0 25px;
+}
+
+.form-label {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: #7a85aa;
+  font-family: 'JetBrains Mono', monospace;
+}
+
+form :where(input, select, button) {
   width: 100%;
-  height: 55px;
+  height: 48px;
   border: none;
   outline: none;
 }
 
-form :where(input, select){
-  background: #4B6588 !important;
-  border: none;
-  outline: none;
+form :where(input, select) {
+  background: #1e2130 !important;
+  border: 1px solid #75a0f524 !important;
+  border-radius: 8px !important;
+  color: #c8d4f0;
+  font-size: 14px;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
 }
 
-select:hover{
-  cursor:pointer;
+form :where(input, select):focus {
+  border-color: #75a0f58c !important;
+  box-shadow: 0 0 0 3px #75a0f51a !important;
 }
 
-select:hover:disabled{
-  cursor:not-allowed;
+form button {
+  border-radius: 8px;
+  font-size: 14px;
+  font-family: 'JetBrains Mono', monospace;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  transition: all 0.15s ease;
+  color: #232736;
 }
 
-input::placeholder{
-  color: #879cb8 !important;
+select:hover {
+  cursor: pointer;
 }
 
-input, select, button, #download{
+select:hover:disabled {
+  cursor: not-allowed;
+  opacity: 0.5;
+}
+
+input::placeholder {
+  color: #4a5a7a !important;
+}
+
+input, select, button, #download {
   border: none !important;
 }
 
 input:focus, select:focus, #download:focus {
-  border: none !important;
-  box-shadow: none !important;
+  outline: none;
 }
 
-#fdownload{
+#fdownload {
   width: 220px;
 }
 
-.wrapper #qr{
+.wrapper #qr {
   position: absolute;
   opacity: 0;
   pointer-events: none;
@@ -100,34 +187,57 @@ input:focus, select:focus, #download:focus {
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  padding: 20px 0 70px 0;
-  border: 1px solid #6285b3;
-  border-radius: 0.25rem;
+  padding: 24px 0 70px 0;
+  border: 1px solid #75a0f533;
+  border-radius: 10px;
+  background: #1e2130;
 }
 
-.wrapper.active #qr{
+.wrapper.active #qr {
   position: relative;
   opacity: 1;
   pointer-events: auto;
   transition: opacity 0.5s ease 0.2s;
 }
 
-#download{
+#download {
   position: absolute;
   bottom: 0;
   width: 100%;
   display: flex;
   flex-direction: column;
-  color: white;
+  color: #232736;
+  border-radius: 0 0 10px 10px;
+  padding: 10px 0;
+  font-size: 13px;
+  font-family: 'JetBrains Mono', monospace;
 }
 
-#download span.size{
+#download span.size {
   font-size: 10px;
   font-weight: 500;
-  margin-top: 0;
+  margin-top: 2px;
   padding-top: 0;
+  opacity: 0.7;
 }
 
-#fqr input[type="color"]{
-  width:100%;
+#fqr input[type="color"] {
+  width: 100%;
+  padding: 4px;
+  cursor: pointer;
+}
+
+.form-control-color::-webkit-color-swatch-wrapper {
+  padding: 4px;
+}
+
+.form-control-color::-webkit-color-swatch {
+  border: none;
+  border-radius: 6px;
+}
+
+.spinner-border {
+  width: 1rem;
+  height: 1rem;
+  border-width: 2px;
 }
