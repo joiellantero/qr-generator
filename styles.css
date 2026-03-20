@@ -242,6 +242,79 @@ html, body {
   border-radius: 4px;
 }
 
+/* ── File upload ── */
+
+.option-field--full {
+  grid-column: 1 / -1;
+}
+
+.file-upload {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  background: #1e2130;
+  border: 1px dashed #75a0f52e;
+  border-radius: 8px;
+  height: 40px;
+  cursor: pointer;
+  transition: border-color 0.15s ease, background 0.15s ease;
+}
+
+.file-upload:hover,
+.file-upload.dragover {
+  border-color: #75a0f566;
+  background: #75a0f50a;
+}
+
+.file-upload.has-file {
+  border-style: solid;
+  border-color: #75a0f533;
+}
+
+.file-upload-text {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  color: #4a5a7a;
+  pointer-events: none;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  padding: 0 30px 0 12px;
+  max-width: 100%;
+}
+
+.file-upload.has-file .file-upload-text {
+  color: #97b7f7;
+}
+
+.file-upload-clear {
+  position: absolute;
+  right: 6px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: none !important;
+  color: #5a6a8a;
+  font-size: 16px;
+  width: 24px;
+  height: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 4px;
+  cursor: pointer;
+  padding: 0;
+  transition: color 0.15s ease, background 0.15s ease;
+}
+
+.file-upload-clear:hover {
+  color: #e8eeff;
+  background: #75a0f51a;
+  transform: translateY(-50%);
+  box-shadow: none;
+}
+
 /* ── Generate button ── */
 
 .btn-generate {

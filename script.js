@@ -4,6 +4,64 @@ let wrapper = document.querySelector(".wrapper");
 let ftheme = document.getElementById('ftheme');
 let theme_value = 'none';
 let isThemeActive = false;
+let bgImageData = null;
+
+// ── Background image upload ──
+const fbgimage = document.getElementById('fbgimage');
+const fileUploadArea = document.getElementById('file-upload-area');
+const fileUploadText = document.getElementById('file-upload-text');
+const fileUploadClear = document.getElementById('file-upload-clear');
+
+fileUploadArea.addEventListener('click', () => fbgimage.click());
+
+fileUploadArea.addEventListener('dragover', e => {
+  e.preventDefault();
+  fileUploadArea.classList.add('dragover');
+});
+
+fileUploadArea.addEventListener('dragleave', () => {
+  fileUploadArea.classList.remove('dragover');
+});
+
+fileUploadArea.addEventListener('drop', e => {
+  e.preventDefault();
+  fileUploadArea.classList.remove('dragover');
+  const file = e.dataTransfer.files[0];
+  if (file && file.type.startsWith('image/')) handleBgImage(file);
+});
+
+fbgimage.addEventListener('change', () => {
+  if (fbgimage.files[0]) handleBgImage(fbgimage.files[0]);
+});
+
+fileUploadClear.addEventListener('click', e => {
+  e.stopPropagation();
+  clearBgImage();
+});
+
+const handleBgImage = (file) => {
+  const reader = new FileReader();
+  reader.onload = e => {
+    bgImageData = e.target.result;
+    fileUploadText.textContent = file.name;
+    fileUploadArea.classList.add('has-file');
+    fileUploadClear.hidden = false;
+    // Reset theme when using custom bg
+    ftheme.value = 'none';
+    theme_value = 'none';
+    isThemeActive = false;
+    document.getElementById('fsize').disabled = false;
+  };
+  reader.readAsDataURL(file);
+};
+
+const clearBgImage = () => {
+  bgImageData = null;
+  fbgimage.value = '';
+  fileUploadText.textContent = 'Drop image or click to upload';
+  fileUploadArea.classList.remove('has-file');
+  fileUploadClear.hidden = true;
+};
 
 fqr.addEventListener('submit', e => {
   e.preventDefault();
@@ -33,12 +91,11 @@ fqr.addEventListener('submit', e => {
 
     // generate the QR using the url input by the user
     // it will always have 128 size
-    // dont display if there is a theme because we will display a different image
-    if (!isThemeActive) generateQR(url, 128, colordark, colorlight, qr_container);
+    // dont display if there is a theme or bg image because we will display a different image
+    if (!isThemeActive && !bgImageData) generateQR(url, 128, colordark, colorlight, qr_container);
 
-    // if the theme is active then we adjust the size of the hidden qr. 
-    // this will be used for the qr size found in the theme
-    if (isThemeActive) {
+    // if the theme or bg image is active then we adjust the size of the hidden qr
+    if (isThemeActive || bgImageData) {
       size = 275;
     }
 
@@ -54,6 +111,12 @@ fqr.addEventListener('submit', e => {
           src = document.getElementById('qr-theme').src
           createDownloadBtn(src, size);
         }, 50);
+      } else if (bgImageData) {
+        applyBgImage(src, size);
+        setTimeout(() => {
+          src = document.getElementById('qr-bg-merged').src;
+          createDownloadBtn(src, size);
+        }, 100);
       } else {
         createDownloadBtn(src, size);
       }
@@ -83,8 +146,8 @@ const generateQR = (url, size, colordark, colorlight, container) => {
 };
 
 const createDownloadBtn = (src, size) => {
-  // the size variable is the size of the qr and not the image itself so if the theme is active we should get the size of the whole image
-  if (isThemeActive) size = 256;
+  // the size variable is the size of the qr and not the image itself so if the theme or bg image is active we should get the size of the whole image
+  if (isThemeActive || bgImageData) size = 256;
 
   const link = document.createElement('a');
   link.id = 'download';
@@ -132,6 +195,34 @@ const applyTheme = (qrimg) => {
   });
 };
 
+const applyBgImage = (qrSrc, size) => {
+  const canvas = document.createElement('canvas');
+  const ctx = canvas.getContext('2d');
+  const bgImg = new Image();
+  bgImg.onload = () => {
+    canvas.width = bgImg.width;
+    canvas.height = bgImg.height;
+    ctx.drawImage(bgImg, 0, 0);
+
+    const qrImg = new Image();
+    qrImg.onload = () => {
+      const qrSize = Math.min(bgImg.width, bgImg.height) * 0.4;
+      const x = (bgImg.width - qrSize) / 2;
+      const y = (bgImg.height - qrSize) / 2;
+      ctx.drawImage(qrImg, x, y, qrSize, qrSize);
+
+      const mergedImg = document.createElement('img');
+      mergedImg.id = 'qr-bg-merged';
+      mergedImg.src = canvas.toDataURL('image/png');
+      mergedImg.style.maxWidth = '128px';
+      mergedImg.style.maxHeight = '128px';
+      document.getElementById('qr').appendChild(mergedImg);
+    };
+    qrImg.src = qrSrc;
+  };
+  bgImg.src = bgImageData;
+};
+
 ftheme.addEventListener('change', () => {
   theme_value = ftheme.options[ftheme.selectedIndex].value;
   let fsize = document.getElementById("fsize");
@@ -140,6 +231,7 @@ ftheme.addEventListener('change', () => {
   if (theme_value !== 'none'){
     fsize.disabled = true;
     fsize.value = 256;
+    clearBgImage();
     if (theme_value == 'candy') fcolordark.value = "#303C7E";
     if (theme_value == 'cherry') fcolordark.value = "#990112";
     if (theme_value == 'coffee') fcolordark.value = "#211E21";
