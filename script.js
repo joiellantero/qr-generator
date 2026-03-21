@@ -157,7 +157,13 @@ const createDownloadBtn = (src, size) => {
   link.id = 'download';
   link.href = src;
   link.download = 'qrcode.png';
-  link.innerHTML = `<span>Download</span><span class="size">${size}x${size} PIXELS</span>`;
+  const dlLabel = document.createElement('span');
+  dlLabel.textContent = 'Download';
+  const dlSize = document.createElement('span');
+  dlSize.className = 'size';
+  dlSize.textContent = `${size}x${size} PIXELS`;
+  link.appendChild(dlLabel);
+  link.appendChild(dlSize);
 
   wrap.appendChild(link);
   document.getElementById('qr').appendChild(wrap);

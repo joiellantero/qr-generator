@@ -1,45 +1,22 @@
-const http = require('http');
 const express = require('express');
-const fs = require("fs")
 const path = require('path');
 
-const server = http.createServer((req, res) => {
-  let filePath = req.url;
-  if (filePath === '/')
-    filePath = '/index.html';
+const app = express();
 
-  filePath = __dirname+filePath;
-  let extname = path.extname(filePath);
-  let contentType = 'text/html';
+app.use((_req, res, next) => {
+  res.setHeader('X-Content-Type-Options', 'nosniff');
+  res.setHeader('X-Frame-Options', 'DENY');
+  res.setHeader('Referrer-Policy', 'strict-origin-when-cross-origin');
+  next();
+});
 
-  switch (extname) {
-      case '.js':
-          contentType = 'text/javascript';
-          break;
-      case '.css':
-          contentType = 'text/css';
-          break;
-  }
+app.use(express.static(path.join(__dirname), {
+  extensions: ['html'],
+  dotfiles: 'deny',
+}));
 
-  fs.exists(filePath, function(exists) {
-      if (exists) {
-          fs.readFile(filePath, function(error, content) {
-              if (error) {
-                  res.writeHead(500);
-                  res.end();
-              }
-              else {                   
-                  res.writeHead(200, { 'Content-Type': contentType });
-                  res.end(content, 'utf-8');                  
-              }
-          });
-      }
-  })
-})
-
-const hostname = 'localhost';
 const port = 3000;
 
-server.listen(port, hostname, () => {
-  console.log(`Server running at http://${hostname}:${port}/`);
+app.listen(port, () => {
+  console.log(`Server running at http://localhost:${port}/`);
 });
