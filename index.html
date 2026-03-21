@@ -13,6 +13,11 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/merge-images/2.0.0/index.umd.min.js" integrity="sha512-CucGNBSd0heUFsbvPI5vFv+vTTAu8IoiFzzXpt1MEa5zfOb+j8Sz1ukN89tyL/+UySg7FqKEkq+PbPNwkIbdbw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
   </head>
   <body>
+    <!-- Neural Network Background -->
+    <div class="neural-bg" id="neural-bg">
+      <svg class="neural-svg" viewBox="0 0 800 600" preserveAspectRatio="xMidYMid slice"></svg>
+    </div>
+
     <div class="wrapper">
       <header class="header">
         <div class="header-title">
@@ -76,7 +81,9 @@
           </div>
         </details>
 
-        <button type="submit" class="btn-generate" value="submit">Generate</button>
+        <div class="btn-gradient-wrap">
+          <button type="submit" class="btn-generate" value="submit">Generate <span class="btn-arrow">→</span></button>
+        </div>
       </form>
 
       <div id="qr"></div>
@@ -85,5 +92,51 @@
     <script src="script.js" type="module" defer></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js" integrity="sha512-CNgIRecGo7nphbeZ04Sc13ka07paqdeTu0WR1IM4kNcpmBAUSHSQX0FslNhTDadL4O5SAGapGt4FodqL8My0mA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
+    <script>
+      // Neural network background
+      (function() {
+        const svg = document.querySelector('.neural-svg');
+        const nodes = Array.from({ length: 50 }, (_, i) => ({
+          x: Math.random() * 800,
+          y: Math.random() * 600,
+          id: 'node-' + i
+        }));
+
+        const lines = [];
+        nodes.forEach((node, i) => {
+          nodes.forEach((other, j) => {
+            if (i >= j) return;
+            const dist = Math.sqrt(Math.pow(node.x - other.x, 2) + Math.pow(node.y - other.y, 2));
+            if (dist < 120 && Math.random() > 0.5) {
+              lines.push({ x1: node.x, y1: node.y, x2: other.x, y2: other.y, delay: Math.random() * 8 });
+            }
+          });
+        });
+
+        lines.forEach((l, i) => {
+          const line = document.createElementNS('http://www.w3.org/2000/svg', 'line');
+          line.setAttribute('x1', l.x1);
+          line.setAttribute('y1', l.y1);
+          line.setAttribute('x2', l.x2);
+          line.setAttribute('y2', l.y2);
+          line.setAttribute('stroke', '#75a0f5');
+          line.setAttribute('stroke-width', '0.5');
+          line.classList.add('neural-line');
+          line.style.animationDelay = l.delay + 's';
+          svg.appendChild(line);
+        });
+
+        nodes.forEach(n => {
+          const circle = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
+          circle.setAttribute('cx', n.x);
+          circle.setAttribute('cy', n.y);
+          circle.setAttribute('r', '2');
+          circle.setAttribute('fill', '#75a0f5');
+          circle.classList.add('neural-node');
+          circle.style.animationDelay = (Math.random() * 4) + 's';
+          svg.appendChild(circle);
+        });
+      })();
+    </script>
   </body>
 </html>

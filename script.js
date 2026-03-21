@@ -149,14 +149,18 @@ const createDownloadBtn = (src, size) => {
   // the size variable is the size of the qr and not the image itself so if the theme or bg image is active we should get the size of the whole image
   if (isThemeActive || bgImageData) size = 256;
 
+  const wrap = document.createElement('div');
+  wrap.id = 'download-wrap';
+  wrap.classList = 'download-gradient-wrap';
+
   const link = document.createElement('a');
   link.id = 'download';
-  link.classList = 'btn btn-light rounded-0';
-  link.href = src
+  link.href = src;
   link.download = 'qrcode.png';
   link.innerHTML = `<span>Download</span><span class="size">${size}x${size} PIXELS</span>`;
 
-  document.getElementById('qr').appendChild(link);
+  wrap.appendChild(link);
+  document.getElementById('qr').appendChild(wrap);
 };
 
 const clearData = () => {
