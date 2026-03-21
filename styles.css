@@ -135,7 +135,7 @@ html, body {
   position: relative;
   z-index: 1;
   background: #292d3e;
-  width: 100%;
+  width: calc(100% - 48px);
   max-width: 440px;
   border-radius: 12px;
   padding: 28px 32px;
