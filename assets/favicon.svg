@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">
+  <rect width="32" height="32" rx="6" fill="#0f172a"/>
+  <g fill="#38bdf8">
+    <!-- Top-left finder pattern -->
+    <rect x="4" y="4" width="10" height="10" rx="1"/>
+    <rect x="6" y="6" width="6" height="6" rx="0.5" fill="#0f172a"/>
+    <rect x="7" y="7" width="4" height="4" rx="0.5" fill="#38bdf8"/>
+    <!-- Top-right finder pattern -->
+    <rect x="18" y="4" width="10" height="10" rx="1"/>
+    <rect x="20" y="6" width="6" height="6" rx="0.5" fill="#0f172a"/>
+    <rect x="21" y="7" width="4" height="4" rx="0.5" fill="#38bdf8"/>
+    <!-- Bottom-left finder pattern -->
+    <rect x="4" y="18" width="10" height="10" rx="1"/>
+    <rect x="6" y="20" width="6" height="6" rx="0.5" fill="#0f172a"/>
+    <rect x="7" y="21" width="4" height="4" rx="0.5" fill="#38bdf8"/>
+    <!-- Data modules -->
+    <rect x="16" y="18" width="3" height="3" rx="0.5"/>
+    <rect x="21" y="18" width="3" height="3" rx="0.5"/>
+    <rect x="25" y="18" width="3" height="3" rx="0.5"/>
+    <rect x="18" y="22" width="3" height="3" rx="0.5"/>
+    <rect x="23" y="22" width="3" height="3" rx="0.5"/>
+    <rect x="16" y="25" width="3" height="3" rx="0.5"/>
+    <rect x="21" y="25" width="3" height="3" rx="0.5"/>
+    <rect x="25" y="25" width="3" height="3" rx="0.5"/>
+  </g>
+</svg>
