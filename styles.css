@@ -57,10 +57,16 @@ html, body {
 
 .header {
   display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-bottom: 20px;
+}
+
+.header-top {
+  display: flex;
   align-items: center;
   justify-content: space-between;
   gap: 16px;
-  margin-bottom: 28px;
 }
 
 .header-title {
@@ -491,6 +497,17 @@ html, body {
   font-size: 9px;
   font-weight: 500;
   margin-top: 1px;
+  opacity: 0.6;
+}
+
+/* ── Privacy note ── */
+
+.privacy-note {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  color: #4a5a7a;
+  letter-spacing: 0.03em;
+  margin: 0;
   opacity: 0.6;
 }
 
