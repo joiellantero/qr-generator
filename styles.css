@@ -493,3 +493,29 @@ html, body {
   height: 0.9rem;
   border-width: 2px;
 }
+
+/* ── Footer ── */
+
+.footer {
+  position: fixed;
+  bottom: 16px;
+  left: 0;
+  right: 0;
+  text-align: center;
+  z-index: 1;
+}
+
+.footer a {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  color: #4a5a7a;
+  text-decoration: none;
+  letter-spacing: 0.04em;
+  opacity: 0.6;
+  transition: opacity 0.15s ease, color 0.15s ease;
+}
+
+.footer a:hover {
+  opacity: 1;
+  color: #75a0f5;
+}
