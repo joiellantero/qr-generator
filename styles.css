@@ -9,6 +9,7 @@
 html, body {
   background: #232736;
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
   min-height: 100vh;
@@ -541,12 +542,9 @@ html, body {
 /* ── Footer ── */
 
 .footer {
-  position: fixed;
-  bottom: 16px;
-  left: 0;
-  right: 0;
   text-align: center;
   z-index: 1;
+  padding-bottom: 16px;
 }
 
 .footer a {
@@ -562,6 +560,13 @@ html, body {
 .footer a:hover {
   opacity: 1;
   color: #75a0f5;
+}
+
+.footer-sep {
+  color: #4a5a7a;
+  opacity: 0.4;
+  margin: 0 6px;
+  font-size: 11px;
 }
 
 /* ── Responsive: Tablet & small screens ── */
