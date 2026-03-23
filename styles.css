@@ -563,6 +563,16 @@ html, body {
   font-size: 11px;
 }
 
+@media (hover: hover) {
+  .footer a {
+    transition: opacity 0.15s ease, color 0.15s ease;
+  }
+  .footer a:hover {
+    opacity: 1;
+    color: #75a0f5;
+  }
+}
+
 /* ── Responsive: Tablet & small screens ── */
 
 @media (max-width: 540px) {
