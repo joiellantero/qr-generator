@@ -6,6 +6,48 @@ let theme_value = 'none';
 let isThemeActive = false;
 let bgImageData = null;
 
+// ── Placeholder typing animation ──
+(function() {
+  const furl = document.getElementById('furl');
+  const phrases = ['https://website.com', 'mailto:youremail@example.com'];
+  let phraseIdx = 0;
+  let charIdx = 0;
+  let deleting = false;
+  const typeSpeed = 80;
+  const deleteSpeed = 40;
+  const pauseAfterType = 2000;
+  const pauseAfterDelete = 500;
+
+  function tick() {
+    const current = phrases[phraseIdx];
+    if (furl === document.activeElement) {
+      setTimeout(tick, 200);
+      return;
+    }
+    if (!deleting) {
+      charIdx++;
+      furl.placeholder = current.slice(0, charIdx);
+      if (charIdx === current.length) {
+        deleting = true;
+        setTimeout(tick, pauseAfterType);
+      } else {
+        setTimeout(tick, typeSpeed);
+      }
+    } else {
+      charIdx--;
+      furl.placeholder = current.slice(0, charIdx);
+      if (charIdx === 0) {
+        deleting = false;
+        phraseIdx = (phraseIdx + 1) % phrases.length;
+        setTimeout(tick, pauseAfterDelete);
+      } else {
+        setTimeout(tick, deleteSpeed);
+      }
+    }
+  }
+  tick();
+})();
+
 // ── Background image upload ──
 const fbgimage = document.getElementById('fbgimage');
 const fileUploadArea = document.getElementById('file-upload-area');

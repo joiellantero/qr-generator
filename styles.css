@@ -554,12 +554,6 @@ html, body {
   text-decoration: none;
   letter-spacing: 0.04em;
   opacity: 0.6;
-  transition: opacity 0.15s ease, color 0.15s ease;
-}
-
-.footer a:hover {
-  opacity: 1;
-  color: #75a0f5;
 }
 
 .footer-sep {
